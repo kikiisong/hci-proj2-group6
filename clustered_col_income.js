@@ -230,7 +230,7 @@ function makeSeries(name, fieldName) {
   legend.data.push(series);
 }
 
-makeSeries("Average income for all households", "all");
+makeSeries("Median income for all households", "all");
 
 
 // Make stuff animate on load
