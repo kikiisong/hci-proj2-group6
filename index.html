@@ -1,0 +1,876 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+    <meta charset="utf-8">
+    <title>Social Determinants of Health Across Maryland</title>
+
+	<!-- Styles -->
+	<style>
+	/*#map_air_quality {
+		width:80%;
+	  	height: 700px;
+	}*/
+	#layered_grocery {
+		  width: 80%;
+		  height: 500px;
+	}
+	/*#chartdiv6 {
+		  width: 80%;
+		  height: 500px;
+	}*/
+	#income {
+		  width: 80%;
+		  height: 500px;
+	}
+	/* {
+		  width: 80%;
+		  height: 500px;
+	}*/
+	/*#chartdiv13 {
+		  width: 80%;
+		  height: 500px;
+	}
+	#chartdiv14 {
+		  width: 80%;
+		  height: 500px;
+	}
+	#chartdiv15 {
+		  width: 80%;
+		  height: 500px;
+	}*/
+	#pie_grocery {
+		  width: 90%;
+		  height: 600px;
+	}
+	#chart_housing_cost {
+		  width: 80%;
+		  height: 500px;
+	}
+	/*#chartdiv19 {
+		  width: 80%;
+		  height: 500px;
+	}*/
+	#life_expectancy {
+		  width: 80%;
+		  height: 500px;
+	}
+	#vert_bw_test_scores {
+		  width: 80%;
+		  height: 500px;
+	}
+	#map_uninsured {
+		  min-width: 70%;
+		  height: 300px;
+	}
+	#map_uninsured_adults {
+		  min-width: 70%;
+		  height: 300px;
+	}
+	/*#map_mental_distress {
+		  width: 80%;
+		  height: 700px;
+	}*/
+	#map_test_scores {
+		  width: 80%;
+		  height: 700px;
+	}
+	#map_physical_activity {
+		display: none;
+	}
+	#map_primary_care{
+		  min-width: 70%;
+		  height: 300px;
+	}
+	#map_mental_care {
+		  min-width: 70%;
+		  height: 300px;
+	}
+	#map_mental_days {
+		display:none;
+	}
+	#mental_oc_block {
+		width: 80%;
+		height: 700px;
+	}
+	#env_block {
+		width: 80%;
+		height: 700px;
+	}
+	</style>
+
+	<!-- Resources -->
+	<script src="https://cdn.amcharts.com/lib/5/index.js"></script>
+	<script src="https://cdn.amcharts.com/lib/5/xy.js"></script>
+	<script src="https://cdn.amcharts.com/lib/5/themes/Animated.js"></script>
+	<script src="https://cdn.amcharts.com/lib/5/percent.js"></script>
+
+	<!-- <script src="barchart1.js"></script> -->
+	<!-- <script src="stackchart1.js"></script> -->
+	<!-- <script src="stackchart2.js"></script> -->
+	<script src="layered_grocery.js"></script>
+	<!-- <script src="100_stacked_col_race.js"></script> -->
+	<script src="100_stacked_col_race_balt_mont.js"></script>
+	<script src="clustered_column_life_expectancy.js"></script>
+	<!-- <script src="clustered_bar_test_scores.js"></script> -->
+	<script src="clustered_col_test_scores.js"></script>
+	<script src="clustered_col_balt_mont.js"></script>
+	<!-- <script src="line_multi_axes_housing.js"></script> -->
+	<script src="grouped_and_sorted_cols_housing.js"></script>
+	<script src="grouped_and_sorted_life_expectancy.js"></script>
+	<script src="clustered_col_balt_mont_income.js"></script>
+	<script src="clustered_col_balt_mont_life.js"></script>
+	<script src="clustered_col_income.js"></script>
+	<script src="exploding_pie_food_access.js"></script>
+	<script src="layered_vehicle_md_mont.js"></script>
+	<!-- <script src="pie_baltimore_grocery.js"></script> -->
+	<!-- <script src="pie_montgomery_grocery.js"></script> -->
+
+	<!-- <script src="horiz_dumbbell_bw_test_scores.js"></script> -->
+	<script src="vert_dumbell_bw_test_scores.js"></script>
+
+  <script src="statemap.js"></script>
+
+	<script src="mapdata_air_quality.js"></script>
+	<script type='text/javascript'>	
+		var map_air_quality=simplemaps_statemap.create();
+	</script>
+
+	<script src="mapdata_uninsured.js"></script>
+	<script type='text/javascript'>	
+		var map_uninsured=simplemaps_statemap.create();
+	</script>
+
+	<script src="mapdata_uninsured_adults.js"></script>
+	<script type='text/javascript'>	
+		var map_uninsured_adults=simplemaps_statemap.create();
+	</script>
+
+	<script src="mapdata_mental_distress.js"></script>
+	<script type='text/javascript'>	
+		var map_mental_distress=simplemaps_statemap.create();
+	</script>
+
+	<script src="mapdata_avg_test_scores.js"></script>
+	<script type='text/javascript'>	
+		var map_test_scores=simplemaps_statemap.create();
+	</script>
+
+	<script src="mapdata_physical_activity.js"></script>
+	<script type='text/javascript'>	
+		var map_test_scores=simplemaps_statemap.create();
+	</script>
+
+	<script src="mapdata_primary_care.js"></script>
+	<script type='text/javascript'>	
+		var map_test_scores=simplemaps_statemap.create();
+	</script>
+
+	<script src="mapdata_mental_care.js"></script>
+	<script type='text/javascript'>	
+		var map_test_scores=simplemaps_statemap.create();
+	</script>
+
+	<script src="mapdata_mental_days.js"></script>
+	<script type='text/javascript'>	
+		var map_test_scores=simplemaps_statemap.create();
+	</script>
+	
+	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet">
+	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"></script>
+
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+	<!-- Our Custom CSS -->
+	<link rel="stylesheet" href="sidebar.css">
+	<link rel="stylesheet" href="style.css">
+	<!-- Scrollbar Custom CSS -->
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/malihu-custom-scrollbar-plugin/3.1.5/jquery.mCustomScrollbar.min.css">
+
+	<!-- Font Awesome JS -->
+    <script defer src="https://use.fontawesome.com/releases/v5.0.13/js/solid.js" integrity="sha384-tzzSw1/Vo+0N5UhStP3bvwWPq+uvzCMfrN1fEFe+xBmv1C/AtVX5K0uZtmcHitFZ" crossorigin="anonymous"></script>
+    <script defer src="https://use.fontawesome.com/releases/v5.0.13/js/fontawesome.js" integrity="sha384-6OIrr52G08NpOFSZdxxz1xdNSndlD4vdcf/q2myIUVO0VsqaGHJsB0RaBE01VTOY" crossorigin="anonymous"></script>
+
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+	
+  </head>
+	<body>
+		<div class="wrapper">
+			<!-- Sidebar  -->
+			<nav id="sidebar">
+				<div class="sidebar-header">
+					<button type="button" id="sidebarCollapse" class="btn collapse_btn">
+						<span>Hide &#10096;</span>
+					</button>
+					<button type="button" id="sidebarShow" class="btn show_btn" style="float: left; padding-left: 0px; margin-left: 0px;">
+						<span style="writing-mode: vertical-lr; text-orientation: upright;">&#10097;Show<span>
+					</button>
+				</div>
+				
+				<ul class="list-unstyled components">
+					<p>Quick Navigation</p>
+					<li>
+						<a href="#intro">Introduction</a>
+					</li>
+					<li>
+						<a href="#ocSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Health Outcomes</a>
+						<ul class="collapse list-unstyled" id="ocSubmenu">
+							<li>
+								<a href="#lifeExpSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Life Expectancy</a>
+									<ul class="collapse list-unstyled" id="lifeExpSubmenu">
+										<li>
+											<a href="#life_exp_bg" class="subSubMenu">Background</a>
+										</li>
+										<li>
+											<a href="#life_exp_title" class="subSubMenu">Graph</a>
+										</li>
+										<li>
+											<a href="#life_exp_analysis" class="subSubMenu">Analysis</a>
+										</li>
+									</ul>
+							</li>
+							<li>
+								<a href="#MentalHealthSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Mental Health</a>
+								<ul class="collapse list-unstyled" id="MentalHealthSubmenu">
+									<li>
+										<a href="#mental_health_bg" class="subSubMenu">Background</a>
+									</li>
+									<li>
+										<a href="#mental_health_graphs" class="subSubMenu">Graphs: Mental Distress Frequency/Poor Mental Health Days</a>
+									</li>
+									<li>
+										<a href="#mental_health_analysis" class="subSubMenu">Analysis</a>
+									</li>
+								</ul>
+							</li>
+						</ul>
+					</li>
+					<li>
+						<a href="#envSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Neighborhood and Built Environment</a>
+						<ul class="collapse list-unstyled" id="envSubmenu">
+							<li>
+								<a href="#env_bg">Background</a>
+							</li>
+							<li>
+								<a href="#selected_env">Graphs:Air Quality/Physical Activity</a>
+							</li>
+							<li>
+								<a href="#env_analysis">Analysis</a>
+							</li>
+						</ul>
+					</li>
+					<li>
+						<a href="#econSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Economic Stability</a>
+						<ul class="collapse list-unstyled" id="econSubmenu">
+							<li>
+								<a href="#housing_bg">Background</a>
+							</li>
+							<li>
+								<a href="#housing_title">Graph: Housing cost and living expense</a>
+							</li>
+							<li>
+								<a href="#income_title">Graph: Income</a>
+							</li>
+							<li>
+								<a href="#housing_analysis">Analysis</a>
+							</li>
+						</ul>
+					</li>
+					<li>
+						<a href="#eduSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Education Access and Quality</a>
+						<ul class="collapse list-unstyled" id="eduSubmenu">
+							<li>
+								<a href="#testing_bg">Background</a>
+							</li>
+							<li>
+								<a href="#test_scores_title">Graph: Average Black and White Test Scores </a>
+							</li>
+							<li>
+								<a href="#average_scores">Graph: Average Test Scores </a>
+							</li>
+							<li>
+								<a href="#testing_analysis">Analysis</a>
+							</li>
+						</ul>
+					</li>
+					<li>
+						<a href="#socSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Social and Community Context</a>
+						<ul class="collapse list-unstyled" id="socSubmenu">
+							<li>
+								<a href="#grocery_bg">Background</a>
+							</li>
+							<li>
+								<a href="#grocery_title">Graph: Grocery Store Access</a>
+							</li>
+							<li>
+								<a href="#grocery_types">Graph: Grocery Store Types</a>
+							</li>
+							<li>
+								<a href="#grocery_analysis">Analysis</a>
+							</li>
+						</ul>
+					</li>
+					<li>
+						<a href="#healthSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Healthcare Access and Quality</a>
+						<ul class="collapse list-unstyled" id="healthSubmenu">
+							<li>
+								<a href="#health_access_bg">Background</a>
+							</li>
+							<li>
+								<a href="#uninsured_title">Graph: % Uninsured</a>
+							</li>
+							<li>
+								<a href="#provider_title">Graph: Healthcare Providers</a>
+							</li>
+							<li>
+								<a href="#health_access_analysis">Analysis</a>
+							</li>
+						</ul>
+					</li>
+					<li>
+						<a href="#conclusion">Conclusion</a>
+					</li>
+					<li>
+						<a href="#ref">References</a>
+					</li>
+				</ul>
+	
+			</nav>
+	
+			<!-- Page Content  -->
+			<div id="content">
+	
+				<div class="text-center">
+					<div class="my-2">
+						<h1>Social Determinants of Health Across Maryland</h1>
+						<p class="lead fw-normal"> Megan Chien, Gwenyth Portillo Wightman, Karine Song</p>
+					</div>
+					<h2 id="intro" style="margin-top: 40px;">Introduction</h2>
+					<p>
+						As students attending school in Baltimore, a number of us have heard of the Black Butterfly effect. 
+						It is the phenomenon where the majority of Baltimore’s Black population is “spread out on both sides of the coveted strip of real estate running down the center of the city like a butterfly’s wings” 
+						[<a class="refLink" href="https://www.amazon.com/Black-Butterfly-Harmful-Politics-America/dp/1421439875">1</a>].
+						Some scholars are even coining the phenomenon as an “America Apartheid” in reference to South Africa’s system of segregation that defined their legislation for over 50 years. The spatial racism in Baltimore binds oppression to geography. 
+						In the 1930s, investors began redlining predominantly Black neighborhoods to mark them as the riskiest financial investments. 
+						This lead to a vicious cycle of disinvestment and disparity in Black communities. 
+						With devalued home values (a pricing difference as much as $48,000) and unequal access to credit to develop, repair, or renovate buildings, Black communities continue to suffer from a worsening racial wealth gap
+						[<a class="refLink" href="https://ncrc.org/the-black-butterfly/">2</a>].
+						The Black Butterfly has public health implications as well. Dilapidated buildings across the city experience problems with blight as well as lead paint. Although Baltimore was the first city in the United States to ban lead paint, the toxic paint and dust still linger in the air and are particularly potent when a row of townhomes is knocked down. 
+						Lead paint has been linked to learning disabilities, developmental delays, ADHD, high blood pressure, and even death
+						[<a class="refLink" href="https://ncrc.org/the-black-butterfly/">2</a>].
+					</p>
+					<img src="intro.png" style="width:400px; float:right; margin-left:10px; padding-right: 7%;">
+					<p>
+						The Black Butterfly in Baltimore inspired us to examine the effects of spatial racism on a larger scale. 
+						We decided to expand to the entirety of Maryland and examine differences between its counties. 
+						In order to more accurately compare and contrast the racial segregation, we chose to focus our analysis on the social determinants of health (SDOH). 
+						These are the “conditions in the environments where people are born, live, learn, work, play, worship, and age that affect a wide range of health, functioning and quality-of-life outcomes and risks”
+						[<a class="refLink" href="https://health.gov/healthypeople/objectives-and-data/social-determinants-health">3</a>].
+						There are five categories of SDOHs:
+					</p>
+					<p>
+						1. Neighborhood and Built Environment<br>
+						2. Economic Stability<br>
+						3. Social and Community Context<br>
+						4. Education Access and Quality<br>
+						5. Health Care Access and Quality
+					</p>
+					<p>
+						We will begin our analysis with an overview of the Maryland health outcomes on the basis of life expectancy and mental health resources. Then, we will analyze each category of SDOH by examining a corresponding factor:
+					</p>
+					<p>
+						1. Neighborhood and Built Environment&#160;&#160;→&#160;&#160;Air Quality & Access to Physical Activity<br>
+						2. Economic Stability&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;→&#160;&#160;Severe Housing Cost Burden<br>
+						3. Education Access and Quality&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;→&#160;&#160;Average Standardized Test Scores<br>
+						4. Social and Community Context&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;→&#160;&#160;Grocery Store Access<br>
+						5. Health Care Access and Quality&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;→&#160;&#160;Healthcare Access and Quality
+					</p>
+
+					<hr>
+					
+					<h2>Health Outcomes in Maryland</h2>
+					<p>
+						To examine social determinants of health across Maryland, we chose two measures as health outcomes: life expectancy and mental health.
+					</p>
+					<h3 id="life_expectancy_title"> Life Expectancy </h3>
+					<h5 id="life_exp_bg">Background</h5>
+					<p style="margin-bottom: 40px;">
+						Life expectancy measures the average number of years a person can expect to live 
+						[<a class="refLink" href="https://www.countyhealthrankings.org/app/maryland/2021/overview">4</a>].
+					</p>
+
+					<h4 id="life_exp_title" class="graph_title" style="text-align: center;"> Average Life Expectancy </h4>
+					<button type="button" class="btn btn-secondary" data-container="body" data-toggle="tooltip" data-placement="right" 
+						title="For each county, the first bar represents the average life expectancy for Black residents, and the second bar represents the average life expectancy for White residents.&#013;
+						The points on the line represent the average life expectancy for all residents, regardless of race, in a given county. &#013;
+						Life expectancy data by race is not available for Garrett county.">
+							<i class="fas fa-info-circle"></i>
+							<span>How to read</span>
+						</button>
+					<div id="life_expectancy" class="mx-auto"></div>
+					  
+					  
+					  <h5 id="life_exp_analysis" style="margin-top: 40px;">Analysis</h5>
+					  <p>
+						We can clearly see that the average life expectancy for Black residents is consistently lower than the average life expectancy of white residents. By examining the social determinants of health below, we will be able to further analyze the life expectancy data. 
+					  </p>
+			  
+					  <br>
+
+					  <h3>Mental Health</h3>
+					  <h5 id="mental_health_bg">Background</h5>
+					  <p>
+						Our mental health data comes from the Behavioral Risk Factor Surveillance System survey. 
+						To estimate mental health, survey respondents were asked, "Thinking about your mental health, which includes stress, depression, and problems with emotions, for how many days during the past 30 days was your mental health not good?" Individuals who responded 14 or more days per month are considered to have frequent mental distress
+						[<a class="refLink" href="https://www.countyhealthrankings.org/app/maryland/2021/overview">4</a>].
+					  </p>
+					
+					  <label id="mental_health_graphs" for="selectedMap1">Choose a map to view:</label>
+					  <select id="selected_oc">
+						  <option value="mental_distress" selected>Frequent Mental Distress</option>
+						  <option value="mental_days">Number of Poor Mental Health Days</option>
+					  </select>
+					  <script>
+						  $("#selected_oc").on('change', function() {
+							  var sel = $("#selected_oc").val();
+							  if (sel=='mental_distress') {
+								$("#mental_title").text("% Frequent Mental Distress");
+								$("#mental_distress_htr").show();
+								 $("#mental_days_htr").hide();
+								 $("#map_mental_distress").show();
+								 $("#map_mental_days").hide();
+							  }else if (sel=='mental_days') {
+								 $("#mental_title").text("Average Number of Poor Mental Health Days");
+								 $("#map_mental_distress").hide();
+								 $("#mental_distress_htr").hide();
+								 $("#mental_days_htr").show();
+								 $("#map_mental_days").show();
+								 document.getElementById("mental_htr").title="New tooltip";
+							  }
+						  });     
+					  </script>
+					  <div id="mental_oc_block" class="mx-auto" style="padding-top: 10px;">
+						<h4 id="mental_title" class="graph_title" style="text-align: center;"> % Frequent Mental Distress </h4>
+						<button id="mental_distress_htr" type="button" class="btn btn-secondary" data-container="body" data-toggle="tooltip" data-placement="right" 
+						title="The % Frequent Mental Distress chart shows the percentage of people who reported 14 or more poor mental health days per month. Darker colors indicate greater prevalence of frequent mental distress.">
+							<i class="fas fa-info-circle"></i>
+							<span>How to read</span>
+						</button>
+						<button id="mental_days_htr" type="button" class="btn btn-secondary" data-container="body" data-toggle="tooltip" data-placement="right" 
+						title="A darker color on the Number of Poor Mental Health Days chart indicates a larger average number of poor mental health days. ">
+							<i class="fas fa-info-circle"></i>
+							<span>How to read</span>
+						</button>
+						<div id="map_mental_distress" class="mx-auto"></div>
+						<div id="map_mental_days" class="mx-auto"></div>
+					  </div>
+					
+					  <h5 id="mental_health_analysis" style="margin-top: 40px;">Analysis</h5>
+					  <p>
+						These two measures of mental health appear to be highly correlated, since darker colored counties tend to have darker colors on both maps. 
+						By considering the social determinants of health below, we hope to gain insight into which social determinants of health are associated with mental health outcomes.
+					  </p>
+
+					  <hr>
+
+					  <h2>Social Determinants of Health in Maryland</h2>
+
+					<h3 id="env_main_title" style="margin-top: 40px;">Neighborhood and Built Environment:<br>
+						<span style="color: slategray;">Air Quality and Access to Physical Activity <span></span></h3>
+					<h5 id="env_bg">Background</h5>
+					<p>
+						Both air quality and access to physical activity are social determinants of health in the “Neighborhood and Built Environment” category. 
+					</p>
+					<p>
+						The Air Quality Index (AQI) is a measure developed by the Environmental Protection Agency to represent the amount of common ambient air pollutants present in the air at a given time. It uses a normalized scale from 0 to 500, with higher AQI values indicating a higher level of pollution. AQI values under 100 are considered to be satisfactory
+						[<a class="refLink" href="https://www.epa.gov/wildfire-smoke-course/wildfire-smoke-and-your-patients-health-air-quality-index">5</a>].
+					</p>
+					<p>
+						Access to physical activity is defined as residing in a census block that is within a half mile of a park, in an urban census block that is within one mile of a recreational facility, or in a rural census block that is within three miles of a recreational facility
+						[<a class="refLink" href="https://www.countyhealthrankings.org/explore-health-rankings/measures-data-sources/county-health-rankings-model/health-factors/health-behaviors/diet-exercise/access-to-exercise-opportunities">6</a>].
+					</p>
+					<label for="selectedMap2">Choose a map to view:</label>
+			
+					<select id="selected_env">
+						<option value="air_quality" selected>Air Quality</option>
+						<option value="physical_activity">Access to Physical Activity</option>
+					</select>
+					<script>
+						$("#selected_env").on('change', function() {
+							var sel = $("#selected_env").val();
+							if (sel=='air_quality') {
+								$("#env_title").text("Median Air Quality Index");
+							$("#map_air_quality").show();
+							$("#air_quality_htr").show();
+								 $("#physical_activity_htr").hide();
+							$("#map_physical_activity").hide();
+							}else if (sel=='physical_activity') {
+								$("#env_title").text("% People with Access to Physical Activity");
+								$("#air_quality_htr").hide();
+								 $("#physical_activity_htr").show();
+								$("#map_air_quality").hide();
+							$("#map_physical_activity").show();
+							}
+						});     
+					</script>
+					<div id="env_block" class="mx-auto" style="padding-top: 10px;">
+						<h4 id="env_title" class="graph_title" style="text-align: center;"> Median Air Quality Index  </h3>
+							<button id="air_quality_htr" type="button" class="btn btn-secondary" data-container="body" data-toggle="tooltip" data-placement="right" 
+						title="A darker color on the Median Air Quality Index map indicates a worse air quality (higher AQI). ">
+							<i class="fas fa-info-circle"></i>
+							<span>How to read</span>
+						</button>
+						<button id="physical_activity_htr" type="button" class="btn btn-secondary" data-container="body" data-toggle="tooltip" data-placement="right" 
+						title="A darker color on the Access to Physical Activity map indicates that a greater percentage of people have access to physical activity. ">
+							<i class="fas fa-info-circle"></i>
+							<span>How to read</span>
+						</button>
+						<div id="map_air_quality" class="mx-auto"></div>
+						<div id="map_physical_activity" class="mx-auto"></div>
+					</div>
+				
+					<h5 id="env_analysis" style="margin-top: 40px;">Analysis</h5>
+					<p>
+						The Median Air Quality Index map shows that all counties have a median air quality index of 46 or less, which meets the EPA’s requirements for satisfactory air quality. The county with the best air quality index is Howard, which has a median AQI of 28, while the county with the worst median AQI is Allegany, with a median AQI of 46. Howard has an average life expectancy of 79 years, while Allegany’s average life expectancy is 76 years. 
+					</p>
+					<p>
+						Life expectancy is impacted by many factors including air quality. Researchers have shown that long-term human exposure to particulate pollution reduces life expectancy by nearly two years 
+						[<a class="refLink" href="https://news.uchicago.edu/story/air-pollution-reduces-global-life-expectancy-nearly-two-years">7</a>].
+						While lower air quality is likely not the only cause of Allegany’s lower life expectancy relative to Howard’s, greater amounts of pollution could be one contributing factor to why Allegany’s residents have a lower life expectancy. 
+					</p>
+					<p>
+						Air quality would be an important factor to keep in mind when it comes to promoting better health across Maryland because residents have little power to protect themselves from the air they breathe. In order to ensure equitable health outcomes, policymakers should consider how air pollution affects citizens and how policies limiting air pollution could benefit citizens’ health 
+						[<a class="refLink" href="https://news.uchicago.edu/story/air-pollution-reduces-global-life-expectancy-nearly-two-years">7</a>].
+					</p>
+					<p>
+						According to researchers, people with greater access to opportunities for exercise should have better health outcomes. Individuals who have access to physical activity opportunities are typically healthier and have a greater life expectancy and lower prevalence of conditions like obesity and hypertension 
+						[<a class="refLink" href="https://www.heart.org/en/health-topics/high-blood-pressure/changes-you-can-make-to-manage-high-blood-pressure/getting-active-to-control-high-blood-pressure">8</a>].
+						People who live within a shorter distance to parks, gyms, and other exercise opportunities are more likely to engage in physical activity
+						[<a class="refLink" href="https://pubmed.ncbi.nlm.nih.gov/2108465/">9</a>].
+					</p>
+					<p>
+						Interestingly, the counties with the greatest access to physical activity do not both have high average life expectancies. Montgomery, where 100% of residents have access to physical activity, has the highest life expectancy in the state, which follows what we would expect based on the research above: areas with greater access to physical activity should have better health outcomes. Meanwhile, 100% of Baltimore City residents have opportunities for exercise, but they also have the lowest average life expectancy in the state. Although Baltimore City residents have access to physical activity, it may be the case that some residents do not take advantage of these opportunities. In order to improve health outcomes for Baltimore City citizens, policymakers and other health department officials should explore the reasons why residents do not use their opportunities to exercise. 
+					</p>
+
+					<h3 id="housing_main_title" style="margin-top: 40px;"> Economic Stability:<br>
+						<span style="color: slategray;">Severe Housing Cost Burden</span> </h3>
+					<h5 id="housing_bg">Background</h5>
+					<p>
+						As a social determinant of health, housing cost burden falls under the “Economic stability”. A household experiences a severe housing cost burden when they spend 50% or more of their household income on housing 
+						[<a class="refLink" href="https://www.countyhealthrankings.org/explore-health-rankings/measures-data-sources/county-health-rankings-model/health-factors/physical-environment/housing-transit/severe-housing-cost-burden">10</a>].
+					</p>
+					<p>
+						We explore associations between severe housing cost burden, cost of living index, and income. The cost of living index measures relative price levels for consumer goods and services, including housing, grocery items, housing, utilities, transportation, and healthcare. The national average for cost of living index is 100 
+						[<a class="refLink" href="https://www2.census.gov/library/publications/2011/compendia/statab/131ed/tables/prices.pdf">11</a>].
+						Data about the cost of living index for Maryland comes from the Maryland Department of Commerce
+						[<a class="refLink" href="https://opendata.maryland.gov/Housing/Choose-Maryland-Compare-Counties-Quality-Of-Life/dyym-bjv4">12</a>].
+					</p>
+					<p>
+						Our income metric is median household income
+						[<a class="refLink" href="https://www.countyhealthrankings.org/explore-health-rankings/measures-data-sources/county-health-rankings-model/health-factors/social-and-economic-factors/income/median-household-income">13</a>].
+					</p>
+
+					<h4 id="housing_title" class="graph_title" style="text-align: center;"> % Severe Housing Cost Burden 
+						<button type="button" class="btn btn-secondary" data-container="body" data-toggle="tooltip" data-placement="right" 
+							title="The % Severe Housing Cost Burden chart shows the percentage of households in a county that spends 50% or more of their household income on housing. The line graph provides the cost of living index for each county.">
+								<i class="fas fa-info-circle"></i>
+								<span>How to read</span>
+						</button>
+					</h4>
+					<div id="chart_housing_cost" class="mx-auto"></div>
+			
+					<h4 id="income_title" class="graph_title" style="text-align: center; padding-top: 10px;"> Median Annual Income </h4>
+					<div id="income" class="mx-auto"></div> <!-- added -->
+
+					<h5 id="housing_analysis" style="margin-top: 40px;">Analysis</h5>
+					<p>
+						Across Maryland, the percentage of households with a severe housing cost burden seems to generally range between 10-15%, with a few outliers, including Baltimore City, Somerset, Prince George’s, and Wicomico. There does not seem to be a clear pattern between the cost of living index and the percentage of the population experiencing a severe housing cost burden. Some counties with a high cost of living have a severe housing cost burden that is comparable with other counties. For example, Howard county has the highest cost of living index, 131.6, but only 12% of its population struggle with housing cost burden. 
+					</p>
+					<p>
+						An important factor to consider when examining severe housing cost burden and cost of living  is income. The income chart shows that Howard residents have the highest income out of all the counties, which likely reduces the housing cost burden, despite the cost of living being higher.
+					</p>
+					<p>
+						In terms of health outcomes, we can examine how severe housing cost burden is associated with mental health outcomes. Severe housing cost burden has been linked to mental health outcomes. When households must spend the majority of their income on housing costs, they struggle to pay for other goods and services, including health food, utility bills, transportation to school and work, and doctor’s bills. It also increases stress and emotional strain. This can cause their health to suffer
+						[<a class="refLink" href="https://www.countyhealthrankings.org/explore-health-rankings/measures-data-sources/county-health-rankings-model/health-factors/physical-environment/housing-transit/severe-housing-cost-burden">10</a>, <a class="refLink" href="https://pubmed.ncbi.nlm.nih.gov/16423128/">14</a>].
+					</p>
+					<p>
+						Looking at the counties with the highest percentage of the population experiencing a severe housing cost burden, we can see that they have worse mental health outcomes. 20% of Baltimore City residents and 23% of Somerset county residents struggle with severe housing cost burden. Baltimore City residents have an average of 4.9 poor mental health days each month. Only two other counties (Allegany and Caroline) have the same or greater number of poor mental health days each month as Baltimore City. Additionally, 15% of Baltimore City residents experience frequent mental distress, which is one of the highest percentages out of Baltimore. Somerset, with 16% frequent mental distress, is one of the two counties with a higher rate of frequent mental distress than Baltimore City. Similarly, Somerset has a relatively high average number of poor mental health days each month (4.6 days). 
+					</p>
+					<p>
+						Given the high rate of severe housing cost burden and poor mental health outcomes in Somerset and Baltimore City, it seems likely that severe housing cost burden might be a factor in mental health outcomes. Experiencing a severe housing cost burden may increase mental distress, resulting in worse mental health outcomes.
+					</p>
+
+
+
+					<h3 id="testing_main_title" style="margin-top: 40px;"> Education Access and Quality:<br>
+						<span style="color: slategray;">Average Standardized Test Scores </span></h3>
+					<h5 id="testing_bg">Background</h5>
+					<p>
+						Average standardized test scores are considered a measure of “Education access and quality”. Average standardized test scores range from -3.5 to 3.5 and are centered about the national average of 0. A score of 1 would indicate that a county performs one standard deviation over the national average, while a score of -1 means that a county performs one standard deviation below the national average
+						[<a class="refLink" href="https://edopportunity.org/">15</a>].
+					</p>
+
+					<h4 id="test_scores_title" class="graph_title" style="text-align: center;"> Average Black and White Test Scores 
+						<button type="button" class="btn btn-secondary" data-container="body" data-toggle="tooltip" data-placement="right" 
+							title="The Average Black and White Test Scores chart graphs the average test scores of Black students as a blue dot and the average test scores for white students as a purple dot. The line between the two points indicates the magnitude of the gap between the test scores of Black and white students.">
+								<i class="fas fa-info-circle"></i>
+								<span>How to read</span>
+						</button>
+					</h4>
+					<!-- <div id="chartdiv6"></div> --> 
+					<div id="vert_bw_test_scores" class="mx-auto"></div>
+			
+					<h4 id="average_scores" style="text-align: center; padding-top: 40px;" class="graph_title"> Average Test Scores 
+						<button type="button" class="btn btn-secondary" data-container="body" data-toggle="tooltip" data-placement="right" 
+							title="On the Average Test Scores graph, counties in green score above the national average, and counties in red score below the national average. Counties that are lighter in color (closer to white) are closer to the national average of 0.">
+								<i class="fas fa-info-circle"></i>
+								<span>How to read</span>
+						</button>
+					</h4>
+					<div id="map_test_scores" class="mx-auto"></div>
+
+					<h5 id="testing_analysis" style="margin-top: 40px;">Analysis</h5>
+					<p>
+						Without considering the health outcomes, there are several clear patterns. In all counties, white students have higher average test scores than Black students, and the gap between Black and white test scores varies in size from 0.24 to 3.12. This indicates that the education system is not working equally well for Black and white students.
+					</p>
+					<p>
+						Education leaders should make it a priority to ensure that the education system serves all students well, especially because of how education is tied to health outcomes. Higher levels of education are associated with higher paying jobs, which are more likely to offer benefits like health insurance. Higher levels of education also provide an increased sense of autonomy, which is associated with better health and fewer chronic conditions
+						[<a class="refLink" href="https://www.rwjf.org/en/library/research/2011/05/education-matters-for-health.html">16</a>].
+						Researchers have even found that education is linked to life expectancy, with college graduates having a life expectancy nine years greater than that of high school dropouts 
+						[<a class="refLink" href="http://www.rwjf.org/en/research-publications/find-rwjf-research/2014/01/education--it-matters-more-to-health-than-ever-before.html">17</a>].
+					</p>
+					<p>
+						Dorchester, which has the largest life expectancy gap (6.6 years) between Black and white residents in the state, also has one of the highest gaps in average test scores between Black and white students. Only five counties have a greater Black/white test score gap. Dorchester also has the second lowest average test score across all races. Average test scores for this county are -0.85 standard deviations below the national average. 
+					</p>
+					<p>
+						As with other social determinants of health, not all countries follow this pattern. Montgomery, for instance, has the largest gap (3.12 standard deviations) in test scores between Black and white students. However, Montgomery has the highest average life expectancy for all residents, regardless of race, in Maryland. It also has a life expectancy gap between Black and white residents of only 1.7 years, while we might expect a larger life expectancy gap to follow from Montgomery’s large Black and white test score gap. 
+					</p>
+
+
+					<h3 id="grocery_main_title" style="margin-top: 40px;"> Social and Conmmunity Context:<br>
+						<span style="color: slategray;">Grocery Store Access</span></h3>
+					<h5 id="grocery_bg">Background</h5>
+
+					<p>
+						To explore grocery access, we visualize data about grocery store access from the U.S. Department of Agriculture. We determined the percentage of a county’s population beyond half a mile grocery store by taking the count of people beyond half a mile from a grocery store and dividing it by the county’s total population
+						[<a class="refLink" href="https://www.countyhealthrankings.org/explore-health-rankings/measures-data-sources/2021-measures">18</a>].
+						We performed a similar operation to get the percentage of people beyond 1 mile from a grocery store.
+					</p>
+					<p>
+						We also use data about the percentage of households that have access to a vehicle from the Johns Hopkins Center for a Liveable Future
+						[<a class="refLink" href="https://mdfoodsystemmap.org/">19</a>].
+					</p>
+					<p>
+						We use data about the number of supermarkets, convenience stores, and small grocery stores in each county
+						[<a class="refLink" href="https://mdfoodsystemmap.org/">19</a>],
+						divided by the total number of grocery stores for that county, to get a breakdown of grocery store types for each county. 
+					</p>
+
+					<h4 id="grocery_title" style="text-align: center;" class="graph_title" > Grocery Store Access & Vehicle Access </h4>
+						<button type="button" class="btn btn-secondary" data-container="body" data-toggle="tooltip" data-placement="right" 
+							title="The Grocery Store Access chart is a layered bar chart that shows the percentage of people beyond 1/2 mile from a grocery store in light blue, the percentage of people beyond 1 mile from a grocery store in medium blue, and the percentage of households without vehicle access in purple.">
+								<i class="fas fa-info-circle"></i>
+								<span>How to read</span>
+						</button>
+					<div id="layered_grocery" class="mx-auto"></div>
+
+					<h4 id="grocery_types" class="graph_title" style="text-align: center; padding-top: 40px;"> Access to Grocery Stores by Type </h4>
+					<button type="button" class="btn btn-secondary" data-container="body" data-toggle="tooltip" data-placement="right" 
+					title="The Access to Grocery Stores by Type chart includes a large pie chart that shows the percentage of the total grocery stores in Maryland that each county contains. When you click on a slice in the large pie chart, the small pie chart will show the grocery store type breakdown for that county.">
+						<i class="fas fa-info-circle"></i>
+						<span>How to read</span>
+					</button>
+					<div id="pie_grocery" class="mx-auto"></div>
+			
+					<h5 id="grocery_analysis" style="margin-top: 40px;">Analysis</h5>
+					<p>
+						For all counties except Baltimore City, a majority of residents live farther than half a mile from a grocery store. In sixteen counties, a majority of the population lives farther than one mile from a grocery store. 
+					</p>
+					<p>
+						Grocery store access is an important factor to consider when promoting better health outcomes because access to healthy food is correlated with a lower prevalence of obesity and diabetes, as well as lower rates of premature death 
+						[<a class="refLink" href="https://pubmed.ncbi.nlm.nih.gov/21967380/">20</a>]. 
+					</p>
+					<p>
+						It is also important to consider vehicle access when examining access to grocery stores, since having a car significantly eases the process of going to the grocery store, even if an individual lives far from a grocery store. 
+					</p>
+					<p>
+						Consider food access in Baltimore City and Montgomery. Looking only at the percentages of the population that are beyond a half mile or one mile from a grocery store, it appears that Montgomery has lower food access than Baltimore City. Only 5% of Baltimore residents are farther than one mile from a grocery store, while four times that--20%--of Montgomery residents live beyond one mile from a grocery store. 
+					</p>
+					<p>
+						However, about 92% of Montgomery residents have access to a vehicle. Since the overwhelming majority of Montgomery residents have reliable access to grocery stores, they can simply use their cars to get to the store, even if they live farther than a mile from the nearest grocery store. Meanwhile, vehicle access in Baltimore City is only 70%, which could mean that many of the 7.5% of Baltimore residents living farther than one mile from a grocery store might lack dependable transportation to a grocery store. By considering vehicle access, we can better understand the impact of living beyond a half mile or one mile from a grocery store. 
+					</p>
+					<p>
+						Living farther from a grocery store does not prevent most Montgomery residents from having access to a grocery store, since they can simply use their cars. As a result, Montgomery residents still have access to healthy food, which would contribute to their high life expectancy (the highest in the state). Meanwhile, not having a car might limit Baltimore residents’ access to healthy food, contributing to their low life expectancy (the lowest in the state). 
+					</p>
+					<p>
+						The layered bar chart about grocery store access includes data about all types of grocery stores: supermarkets, small grocery stores, and convenience stores. Because supermarkets tend to provide healthier food options than small grocery stores and convenience stores 
+						[<a class="refLink" href="https://pubmed.ncbi.nlm.nih.gov/27702412/">21</a>], we also analyze the type of grocery stores that residents have access to. 
+					</p>
+					<p>
+						For example, 63.88% of Baltimore City’s supermarkets are small grocery stores, 31.19% are convenience stores, and only 4.93% are supermarkets. Having a greater proportion of supermarkets would provide residents with better access to healthy food and might help to raise Baltimore City’s low average life expectancy (72.8 years, the lowest in the state).
+					</p>
+
+					<h3 id="health_access_title" style="margin-top: 40px;"> Healthcare Access and Quality	</h3>
+					<h5 id="health_access_bg">Background</h5>
+					<p>
+						The percentage of uninsured adults refers to the percentage of adults under age 65 without health insurance, and the percentage of uninsured children refers to the percentage of children under age 19 without health insurance 
+						[<a class="refLink" href="https://www.countyhealthrankings.org/explore-health-rankings/measures-data-sources/county-health-rankings-model/health-factors/clinical-care/access-to-care/uninsured-children">22</a>].
+					</p>
+					<p>
+						The primary care physicians data describes the ratio of a county’s population to the number of primary care physicians in that county. The mental health providers data describes the ratio of a county’s population to the number of mental health providers in that county.
+					</p>
+						<h4 id="uninsured_title" style="text-align: center;" class="graph_title">% Uninsured </h4>
+							<button type="button" class="btn btn-secondary" data-container="body" data-toggle="tooltip" data-placement="right" 
+						title="A darker color on the % Uninsured maps indicates that the county has a larger percentage of uninsured adults or children.">
+							<i class="fas fa-info-circle"></i>
+							<span>How to read</span>
+						</button>
+					<!-- TODO: Button to view either adults map or children map -->
+					<div class="container-fluid">
+						<div class="row justify-content-center">
+							<div class="col-4">
+								<h4> % Uninsured Adults</h4>
+								<div id="map_uninsured_adults" class="mx-auto"></div>
+							</div>
+							<div class="col-4">
+								<h4> % Uninsured Children</h4>
+								<div id="map_uninsured" class="mx-auto"></div>
+							</div>
+						</div>
+					</div>
+				
+					<h4 id="provider_title" style="text-align: center;" class="graph_title">Healthcare Providers</h4>
+					<button type="button" class="btn btn-secondary" data-container="body" data-toggle="tooltip" data-placement="right" 
+					title="A darker color on the Healthcare Providers maps indicates a lower ratio of residents to each healthcare provider (better healthcare access). ">
+						<i class="fas fa-info-circle"></i>
+						<span>How to read</span>
+					</button>
+					<!-- TODO: Button to view either primary care map or mental care map -->
+					<div class="row justify-content-center">
+						<div class="col-4">
+							<h4> Primary Care Physicians </h4>
+							<div id="map_primary_care" class="mx-auto"></div>
+						</div>
+						<div class="col-4">
+							<h4> Mental Health Providers </h4>
+							<div id="map_mental_care" class="mx-auto"></div>
+						</div>
+					</div>
+
+					<h5 id="health_access_analysis" style="margin-top: 40px;">Analysis</h5>
+					<p>
+						In most counties, 10% or less of the adult population is uninsured, with the exception of Prince George’s, where 14% of the adult population is uninsured. There is not much variation in the percentage of uninsured children, with all the counties falling in a range of 2-5% for this measure. 
+					</p>
+					<p>
+						Researchers have found that health insurance is closely tied to health outcomes. The Kaiser Family Foundation 
+						[<a class="refLink" href="https://www.kff.org/uninsured/report/the-uninsured-and-the-aca-a-primer-key-facts-about-health-insurance-and-the-uninsured-amidst-changes-to-the-affordable-care-act/">23</a>] finds that having health insurance makes people more likely to get the necessary medical care they need within a timely manner, which increases their overall health compared to uninsured people. Uninsured individuals are more likely to postpone or forgo medical attention, which means preventable conditions and chronic diseases could go undetected or untreated. 
+					</p>
+					<p>
+						Based on the close relationship between health insurance and health outcomes, we would expect counties with higher amounts of uninsured adults to have worse health outcomes, such as a lower life expectancy. However, this relationship does not hold for Prince George’s. Despite having the highest percentage of uninsured adults in the state, Prince George’s has an average life expectancy of 78.6 years, which is greater than nine other counties. 
+					</p>
+					<p>
+						Howard and Charles have the lowest rates of uninsured adults, so we would expect them to have high life expectancies compared to other counties. Howard County has the second highest life expectancy, but Charles has a greater average life expectancy than only nine other counties, just like Prince George’s. Although these patterns do not exactly follow what we would expect based on research from the Kaiser Family Foundation 
+						[<a class="refLink" href="https://www.kff.org/uninsured/report/the-uninsured-and-the-aca-a-primer-key-facts-about-health-insurance-and-the-uninsured-amidst-changes-to-the-affordable-care-act/">23</a>], there are many factors that impact life expectancy, and this complexity could obscure the association between being insured and life expectancy. 
+					</p>
+					<p>
+						We also examine the ratio of a population to the healthcare providers in a given county. This is an estimate of access to primary care physicians and mental healthcare providers. We would expect regions with higher rates of accessibility to healthcare providers to have better health outcomes in physical and mental health because doctors provide preventative care, primary care, emotional and mental support, and referrals to specialty care when necessary 
+						[<a class="refLink" href="https://pubmed.ncbi.nlm.nih.gov/18212319/">24</a>].
+					</p>
+					<p>
+						We can observe the association between healthcare access and health outcomes in the case of Somerset, which has a ratio of 2853 citizens to every one primary healthcare physician. This is one of the highest ratios in Maryland and represents low access to doctors. Somerset’s average life expectancy is the second lowest. When it comes to mental healthcare, Caroline county has 2227 citizens to every one mental health provider, the highest ratio in the state. It also has the highest average number of poor mental health days per month and the highest percentage of adults experiencing frequent mental distress. 
+					</p>
+
+					<hr>
+					<h2 id="conclusion">Conclusion</h2>
+					<p>
+						This report only scratches the surface in terms of social determinants of health, since we chose only one to two social determinants of health for each category described by the U.S Department of Health 
+						[<a class="refLink" href="https://health.gov/healthypeople/objectives-and-data/social-determinants-health">3</a>]. As future directions for this analysis, we would like to explore additional social determinants of health. 
+					</p>
+					<p>
+						In the Neighborhood and Built Environment category, we saw that median air quality falls within a satisfactory range throughout Maryland. Perhaps other metrics (e.g., total number of days each year that air quality is unsatisfactory) could be explored to investigate how air quality impacts health. 
+					</p>
+					<p>
+						We also observed that although 100% of Baltimore City residents have access to physical activity, their average life expectancy is the lowest in the state. Additional data metrics should be explored to see what proportion of residents actually take advantage of opportunities for exercise and whether there are any barriers to engaging in physical activity. This analysis would  inform Baltimore City leaders about how to develop campaigns to promote exercise, as well as opportunities to reduce any barriers to exercise. 
+					</p>
+
+					<hr>
+					<h2 id="ref">References</h2>
+					<p>
+						1. Brown, Lawrence T. “The Black Butterfly: The Harmful Politics of Race and Space in America.” Amazon, Johns Hopkins University Press, 2021, https://www.amazon.com/Black-Butterfly-Harmful-Politics-America/dp/1421439875. <br>
+						2. White, Marceline. “Baltimore: The Black Butterfly " NCRC.” NCRC, 24 Sept. 2021, https://ncrc.org/the-black-butterfly/. <br>
+						3. “Social Determinants of Health.” Social Determinants of Health - Healthy People 2030, https://health.gov/healthypeople/objectives-and-data/social-determinants-health. <br>
+						4. County Health Rankings & Roadmaps, https://www.countyhealthrankings.org/app/maryland/2021/overview. <br>
+						5. EPA, Environmental Protection Agency, https://www.epa.gov/wildfire-smoke-course/wildfire-smoke-and-your-patients-health-air-quality-index. <br>
+						6. “Access to Exercise Opportunities.” County Health Rankings & Roadmaps, https://www.countyhealthrankings.org/explore-health-rankings/measures-data-sources/county-health-rankings-model/health-factors/health-behaviors/diet-exercise/access-to-exercise-opportunities. <br>
+						7. “Air Pollution Reduces Global Life Expectancy by Nearly Two Years.” University of Chicago News, https://news.uchicago.edu/story/air-pollution-reduces-global-life-expectancy-nearly-two-years. <br>
+						8. “Getting Active to Control High Blood Pressure.” Www.heart.org, https://www.heart.org/en/health-topics/high-blood-pressure/changes-you-can-make-to-manage-high-blood-pressure/getting-active-to-control-high-blood-pressure. <br>
+						9. Sallis, James F., et al. "Distance between homes and exercise facilities related to frequency of exercise among San Diego residents." Public health reports 105.2 (1990): 179.<br>
+						10. “Severe Housing Cost Burden.” County Health Rankings & Roadmaps, https://www.countyhealthrankings.org/explore-health-rankings/measures-data-sources/county-health-rankings-model/health-factors/physical-environment/housing-transit/severe-housing-cost-burden. <br>
+						11. Section 14 Prices - Census.gov. https://www2.census.gov/library/publications/2011/compendia/statab/131ed/tables/prices.pdf. <br>
+						12. Commerce, Maryland Department of. “Choose Maryland: Compare Counties - Quality of Life: Open Data.” Choose Maryland: Compare Counties - Quality Of Life | Open Data, 6 Mar. 2019, https://opendata.maryland.gov/Housing/Choose-Maryland-Compare-Counties-Quality-Of-Life/dyym-bjv4. <br>
+						13. “Median Household Income.” County Health Rankings & Roadmaps, https://www.countyhealthrankings.org/explore-health-rankings/measures-data-sources/county-health-rankings-model/health-factors/social-and-economic-factors/income/median-household-income. <br>
+						14. Sallis, J F, et al. “Distance between Homes and Exercise Facilities Related to Frequency of Exercise among San Diego Residents.” Public Health Reports (Washington, D.C. : 1974), U.S. National Library of Medicine, 1990, https://www.ncbi.nlm.nih.gov/pmc/articles/PMC1580056/. <br>
+						15. The Educational Opportunity Project at Stanford University. “The Educational Opportunity Project at Stanford: Home.” The Educational Opportunity Project at Stanford University, https://edopportunity.org/. <br>
+						16. Egerter S, Braveman P, Sadegh-Nobari T, Grossman-Kahn R, Dekker M. Education and health. Princeton: Robert Wood Johnson Foundation (RWJF); 2011. Exploring the Social Determinants of Health Issue Brief No. 5.<br>
+						17. Center on Society and Health. Education: It matters more to health than ever before. Richmond: Center on Society and Health, Virginia Commonwealth University (VCU); 2014.<br>
+						18. “Explore Health Rankings: 2021 Measures.” County Health Rankings & Roadmaps, https://www.countyhealthrankings.org/explore-health-rankings/measures-data-sources/2021-measures.<br> 
+						19. Maryland Food System Map, https://mdfoodsystemmap.org/ <br>
+						20. Ahern M, Brown C, Dukas S. A national study of the association between food environments and county-level health outcomes. The Journal of Rural Health. 2011;27:367-379. https://pubmed.ncbi.nlm.nih.gov/21967380/.<br>
+						21. Vaughan CA, Cohen DA, Ghosh-Dastidar M, Hunter GP, Dubowitz T. Where do food desert residents buy most of their junk food? Supermarkets. Public Health Nutr. 2017 Oct;20(14):2608-2616. https://pubmed.ncbi.nlm.nih.gov/27702412/.<br>
+						22. “Uninsured Children.” County Health Rankings & Roadmaps, https://www.countyhealthrankings.org/explore-health-rankings/measures-data-sources/county-health-rankings-model/health-factors/clinical-care/access-to-care/uninsured-children. <br>
+						23. Garfield, Rachel, and Kendal Orgera. “The Uninsured and the ACA: A Primer – Key Facts about Health Insurance and the Uninsured amidst Changes to the Affordable Care Act.” KFF, 13 May 2020, https://www.kff.org/uninsured/report/the-uninsured-and-the-aca-a-primer-key-facts-about-health-insurance-and-the-uninsured-amidst-changes-to-the-affordable-care-act/. <br>
+						24. Goodman DC, Grumbach K. Does having more physicians lead to better health system performance? JAMA. 2008;299(3):335-337. https://pubmed.ncbi.nlm.nih.gov/18212319/.<br>
+
+						<!--change href to the link and replace "cite" with the text we want to display--> 
+						<!-- [<a class="refLink" href="https://www.countyhealthrankings.org/app/maryland/2021/overview">cite</a>]. -->
+					</p>
+			
+					<!-- IMPORTANT: might want to include a race breakdown graph (either of just the two counties or of all counties) -->
+			
+					<!-- BELOW: Baltimore City vs. Montgomery graphs. Excluded for now since I think we should do analysis of the two counties under the graphs above, instead of creating graphs for the two counties (this probably doesn't make much sense, so just ask me haha) -->
+					<!-- <h2> Baltimore City vs. Montgomery County </h2> -->
+					<!-- <h3> Average Test Scores in Baltimore City and Montgomery</h3> -->
+					<!-- <div id="chartdiv13"></div> -->
+					<!-- <h3> Income Levels in Baltimore City and Montgomery</h3> -->
+					<!-- <div id="chartdiv14"></div> -->
+					<!-- <h3> Life Expectancy in Baltimore City and Montgomery</h3> -->
+					<!-- <div id="chartdiv15"></div> -->
+					<!-- <h3> Race Breakdown of Baltimore City and Montgomery</h3> -->
+					<!-- <div id="chartdiv19"></div> -->
+				</div>
+				
+			</div>
+		</div>
+	
+		<!-- jQuery CDN - Slim version (=without AJAX) -->
+		<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+		<!-- Popper.JS -->
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.0/umd/popper.min.js" integrity="sha384-cs/chFZiN24E4KMATLdqdvsezGxaGsi4hLGOzlXwp5UZB1LY//20VyM2taTB4QvJ" crossorigin="anonymous"></script>
+		<!-- Bootstrap JS -->
+		<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js" integrity="sha384-uefMccjFJAIv6A+rW+L4AHf99KvxDjWSu1z9VI8SKNVmz4sk7buKt/6v9KI65qnm" crossorigin="anonymous"></script>
+		<!-- jQuery Custom Scroller CDN -->
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/malihu-custom-scrollbar-plugin/3.1.5/jquery.mCustomScrollbar.concat.min.js"></script>
+	
+		<script type="text/javascript">
+			$(document).ready(function () {
+				$("#sidebar").mCustomScrollbar({
+					theme: "minimal"
+				});
+	
+				$('#sidebarCollapse').on('click', function () {
+					$('#sidebar, #content').toggleClass('active');
+				});
+
+				$('#sidebarShow').on('click', function () {
+					$('#sidebar, #content').toggleClass('active');
+				});
+				$('[data-toggle="tooltip"]').tooltip();
+			});
+		</script>
+
+		
+	</body>
+</html>
+      
+    
+
